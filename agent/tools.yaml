@@ -1,0 +1,46 @@
+# MCP Toolbox Configuration for DAB Databases
+# More info: https://github.com/googleapis/genai-toolbox
+
+sources:
+  postgres_dab:
+    type: postgres
+    uri: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}"
+  
+  mongodb_dab:
+    type: mongodb
+    uri: "${MONGODB_URI}"
+  
+  sqlite_dab:
+    type: sqlite
+    uri: "file:${SQLITE_PATH}"
+  
+  duckdb_dab:
+    type: duckdb
+    uri: "${DUCKDB_PATH}"
+
+tools:
+  - name: query_postgres
+    source: postgres_dab
+    description: "Execute read-only SQL queries on PostgreSQL databases"
+  
+  - name: query_mongodb
+    source: mongodb_dab
+    description: "Execute MongoDB aggregation pipelines"
+  
+  - name: query_sqlite
+    source: sqlite_dab
+    description: "Execute SQL queries on SQLite databases"
+  
+  - name: query_duckdb
+    source: duckdb_dab
+    description: "Execute analytical SQL queries on DuckDB"
+  
+  - name: list_tables
+    source: postgres_dab
+    method: list_tables
+    description: "List all tables in the database"
+  
+  - name: describe_table
+    source: postgres_dab
+    method: describe_table
+    description: "Get schema information for a specific table"

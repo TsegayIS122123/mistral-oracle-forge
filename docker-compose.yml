@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dab
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mongodb:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  mcp-toolbox:
+    image: google/genai-toolbox:latest
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./agent/tools.yaml:/config/tools.yaml
+    command: --config /config/tools.yaml
+
+  sandbox:
+    image: python:3.10-slim
+    ports:
+      - "8080:8080"
+    working_dir: /app
+    command: python -m http.server 8080
+
+volumes:
+  postgres_data:
+  mongo_data:

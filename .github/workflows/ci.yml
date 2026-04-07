@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  check-structure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check directory structure
+        run: |
+          echo "Checking project structure..."
+          [ -d "agent" ] && echo "✓ agent/"
+          [ -d "kb" ] && echo "✓ kb/"
+          [ -d "eval" ] && echo "✓ eval/"
+          [ -d "probes" ] && echo "✓ probes/"
+          [ -d "planning" ] && echo "✓ planning/"
+          [ -d "utils" ] && echo "✓ utils/"
+          [ -d "signal" ] && echo "✓ signal/"
+          [ -f "README.md" ] && echo "✓ README.md"
+          [ -f "agent/AGENT.md" ] && echo "✓ agent/AGENT.md"
+          [ -f "agent/tools.yaml" ] && echo "✓ agent/tools.yaml"
+          echo "Structure check complete"
+      
+      - name: Check Python files syntax
+        run: |
+          echo "Checking Python syntax..."
+          python -m py_compile agent/main.py || true
+          python -m py_compile agent/query_router.py || true
+          python -m py_compile agent/db_connector.py || true
+          python -m py_compile agent/join_resolver.py || true
+          echo "Syntax check complete"

@@ -1,0 +1,48 @@
+
+---
+
+## .gitignore
+
+```gitignore
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+env/
+venv/
+.env
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+logs/
+
+# Results (keep structure but not data)
+results/*.json
+!results/.gitkeep
+
+# SSH keys
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+.secrets/
+config/local.yaml

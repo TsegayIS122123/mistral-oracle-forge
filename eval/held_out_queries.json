@@ -1,0 +1,14 @@
+[
+    {
+        "query": "Show me total sales by region",
+        "expected": "sales"
+    },
+    {
+        "query": "List all customers",
+        "expected": "customer"
+    },
+    {
+        "query": "What is the average order value?",
+        "expected": "average"
+    }
+]
